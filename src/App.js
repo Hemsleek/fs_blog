@@ -15,6 +15,7 @@ const App = () => {
 
   const handleLogin = (e) => {
     e.preventDefault()
+    blogService.create()
   }
 
   return (
