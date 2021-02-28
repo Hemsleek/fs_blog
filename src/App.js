@@ -4,6 +4,9 @@ import blogService from './services/blogs'
 import { login } from './services/login'
 
 const App = () => { 
+  const [title, setTitle] = useState('')
+  const [author, setAuthor] = useState('')
+  const [url, setUrl] = useState('')
   const [blogs, setBlogs] = useState([])
   const [user, setUser] = useState(null)
   const [message, setMessage] = useState(null)
@@ -29,6 +32,7 @@ const App = () => {
     window.localStorage.setItem('user' , JSON.stringify(user))
     setUser(user)
     
+    
   } catch (error) {
       console.log(error.response.data); 
   }
@@ -39,7 +43,10 @@ const App = () => {
     window.localStorage.removeItem('user')
     setUser(null)
   }
+  const addBlog = (e) =>{
+    e.preventDefault()
 
+  }
   return (
     <div>
     {!user?
@@ -69,35 +76,35 @@ const App = () => {
       </>
       :
       <>
-      <form onSubmit={handleLogin}>
+      <form onSubmit={addBlog}>
         <div>
-            title
+            title:
             <input
             type="text"
-            value={username}
-            name="Username"
-            onChange={({ target }) => setUsername(target.value)}
+            value={title}
+            name="Title"
+            onChange={({ target }) => setTitle(target.value)}
           />
         </div>
         <div>
-            author
+            author:
             <input
             type="text"
-            value={password}
-            name="Password"
-            onChange={({ target }) => setPassword(target.value)}
+            value={author}
+            name="Author"
+            onChange={({ target }) => setAuthor(target.value)}
           />
         </div>
         <div>
-            author
+            url:
             <input
-            type="password"
-            value={password}
-            name="Password"
-            onChange={({ target }) => setPassword(target.value)}
+            type="text"
+            value={url}
+            name="Url"
+            onChange={({ target }) => setUrl(target.value)}
           />
         </div>
-        <button type="submit">login</button>
+        <button type="submit">save</button>
       </form>
       <h2>blogs</h2>
       <h3>

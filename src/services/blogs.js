@@ -5,5 +5,8 @@ const getAll = () => {
   const request = axios.get(baseUrl)
   return request.then(response => response.data)
 } 
+const create = async() => {
 
-export default { getAll }
+}
+
+export default { getAll, create }
