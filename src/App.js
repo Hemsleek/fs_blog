@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Blog from './components/Blog'
-import blogService from './services/blogs'
+import blogService,{ create } from './services/blogs'
 import { login } from './services/login'
 
 const App = () => { 
@@ -31,7 +31,7 @@ const App = () => {
     const user = await login({ username, password })
     window.localStorage.setItem('user' , JSON.stringify(user))
     setUser(user)
-    
+    setToken(user.token)
     
   } catch (error) {
       console.log(error.response.data); 
