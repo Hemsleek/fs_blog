@@ -37,6 +37,7 @@ const App = () => {
       const user = await login({ username, password })
       window.localStorage.setItem('user' , JSON.stringify(user))
       blogService.setToken(user.token)
+      
       setUser(user)
       setUsername('')
       setPassword('')
@@ -53,9 +54,17 @@ const App = () => {
   }
   const addBlog = async e =>{
     e.preventDefault()
-    const newBlog = await blogService.create({title, author, url, likes:0})
-    console.log({newBlog})
-    setBlogs(blogs.concat(newBlog))
+    try {
+      const newBlog = await blogService.create({title, author, url, likes:0})
+      console.log({newBlog})
+      setBlogs(blogs.concat(newBlog))
+      setTitle('')
+      setUrl('')
+      setAuthor('')
+      
+    } catch (error) {
+      console.log(error.response.data)
+    }
   }
   return (
     <>
