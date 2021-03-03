@@ -42,8 +42,12 @@ const App = () => {
       setUsername('')
       setPassword('')
       
+      
     } catch (error) {
-        console.log(error.response.data); 
+        setMessage(error.response.data); 
+        setTimeout(() => {
+          setMessage(null)
+        }, 3000);
     }
 
   }
@@ -58,9 +62,13 @@ const App = () => {
       const newBlog = await blogService.create({title, author, url, likes:0})
       console.log({newBlog})
       setBlogs(blogs.concat(newBlog))
+      setMessage(`A new Blog ${title} by ${author} added`)
       setTitle('')
       setUrl('')
       setAuthor('')
+      setTimeout(() => {
+        setMessage(null)
+      }, 3000);
       
     } catch (error) {
       console.log(error.response.data)
