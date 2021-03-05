@@ -10,13 +10,13 @@ const App = () => {
   const [url, setUrl] = useState('')
   const [blogs, setBlogs] = useState([])
   const [user, setUser] = useState(null)
-  const [message, setMessage] = useState(null)
+  const [message, setMessage] = useState({text:null,type:'error'})
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
   const delayTimer = (timer=3000) =>{
     setTimeout(() => {
-      setMessage(null)
+      setMessage({...message,text:null})
     }, timer);
   }
 
@@ -50,7 +50,7 @@ const App = () => {
       
       
     } catch (error) {
-        setMessage(error.response.data); 
+        setMessage({...message,text:error.response.data}); 
        delayTimer()
     }
 
@@ -66,7 +66,7 @@ const App = () => {
       const newBlog = await blogService.create({title, author, url, likes:0})
       console.log({newBlog})
       setBlogs(blogs.concat(newBlog))
-      setMessage(`A new Blog ${title} by ${author} added`)
+      setMessage({...message,text:`A new Blog ${title} by ${author} added`,type:'success'})
       setTitle('')
       setUrl('')
       setAuthor('')
