@@ -14,6 +14,12 @@ const App = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
+  const delayTimer = (timer=3000) =>{
+    setTimeout(() => {
+      setMessage(null)
+    }, timer);
+  }
+
   useEffect(() => {
     blogService.getAll().then(blogs =>
       setBlogs( blogs )
@@ -45,9 +51,7 @@ const App = () => {
       
     } catch (error) {
         setMessage(error.response.data); 
-        setTimeout(() => {
-          setMessage(null)
-        }, 3000);
+       delayTimer()
     }
 
   }
@@ -66,9 +70,7 @@ const App = () => {
       setTitle('')
       setUrl('')
       setAuthor('')
-      setTimeout(() => {
-        setMessage(null)
-      }, 3000);
+      delayTimer()
       
     } catch (error) {
       console.log(error.response.data)
