@@ -4,10 +4,7 @@ import Notification from './components/Notification'
 import blogService from './services/blogs'
 import { login } from './services/login'
 
-const App = () => { 
-  const [title, setTitle] = useState('')
-  const [author, setAuthor] = useState('')
-  const [url, setUrl] = useState('')
+const App = () => {
   const [blogs, setBlogs] = useState([])
   const [user, setUser] = useState(null)
   const [message, setMessage] = useState({text:null,type:'error'})
@@ -62,14 +59,19 @@ const App = () => {
   }
   const addBlog = async e =>{
     e.preventDefault()
+    
+    const form = e.target
+    console.log(form)
+    const [Title,Author,Url] = e.target
+    console.log(Title,Author,Url)
+    
+
     try {
-      const newBlog = await blogService.create({title, author, url, likes:0})
+      const newBlog = await blogService.create({title:Title.value, author:Author.value, url:Url.value, likes:0})
       console.log({newBlog})
       setBlogs(blogs.concat(newBlog))
-      setMessage({...message,text:`A new Blog ${title} by ${author} added`,type:'success'})
-      setTitle('')
-      setUrl('')
-      setAuthor('')
+      setMessage({...message,text:`A new Blog ${Title.value} by ${Author.value} added`,type:'success'})
+      form.reset()
       delayTimer()
       
     } catch (error) {
@@ -112,27 +114,21 @@ const App = () => {
               title:
               <input
               type="text"
-              value={title}
               name="Title"
-              onChange={({ target }) => setTitle(target.value)}
             />
           </div>
           <div>
               author:
               <input
               type="text"
-              value={author}
               name="Author"
-              onChange={({ target }) => setAuthor(target.value)}
             />
           </div>
           <div>
               url:
               <input
               type="text"
-              value={url}
               name="Url"
-              onChange={({ target }) => setUrl(target.value)}
             />
           </div>
           <button type="submit">save</button>
