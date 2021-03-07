@@ -3,6 +3,7 @@ import Blog from './components/Blog'
 import Notification from './components/Notification'
 import blogService from './services/blogs'
 import { login } from './services/login'
+import LoginForm from './components/LoginForm.jsx'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -59,9 +60,7 @@ const App = () => {
   }
   const addBlog = async e =>{
     e.preventDefault()
-    
     const form = e.target
-    console.log(form)
     const [Title,Author,Url] = e.target
     console.log(Title,Author,Url)
     
@@ -83,30 +82,13 @@ const App = () => {
       <Notification message = {message} />
       <div>
       {!user?
-        <>
-        <h2>Login</h2>
-        <form onSubmit={handleLogin}>
-          <div>
-            username
-              <input
-              type="text"
-              value={username}
-              name="Username"
-              onChange={({ target }) => setUsername(target.value)}
-            />
-          </div>
-          <div>
-            password
-              <input
-              type="password"
-              value={password}
-              name="Password"
-              onChange={({ target }) => setPassword(target.value)}
-            />
-          </div>
-          <button type="submit">login</button>
-        </form>
-        </>
+        <LoginForm 
+        username = { username}
+        password = { password }
+        handleSubmit = {handleLogin}
+        handleUsernameChange = {({ target }) => setUsername(target.value)}
+        handlePasswordChange = { ({ target }) => setPassword(target.value) }
+        />
         :
         <>
         <form onSubmit={addBlog}>
@@ -141,7 +123,7 @@ const App = () => {
         {blogs.map(blog =>
           <Blog key={blog.id} blog={blog} />
         )}
-        </>
+       </>
       }
       </div>
     </>
