@@ -3,7 +3,8 @@ import Blog from './components/Blog'
 import Notification from './components/Notification'
 import blogService from './services/blogs'
 import { login } from './services/login'
-import LoginForm from './components/LoginForm.jsx'
+import LoginForm from './components/LoginForm'
+import Toggable from './components/Toggable'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -82,13 +83,15 @@ const App = () => {
       <Notification message = {message} />
       <div>
       {!user?
-        <LoginForm 
-        username = { username}
-        password = { password }
-        handleSubmit = {handleLogin}
-        handleUsernameChange = {({ target }) => setUsername(target.value)}
-        handlePasswordChange = { ({ target }) => setPassword(target.value) }
-        />
+        <Toggable buttonLabel = 'Login'>
+          <LoginForm 
+            username = { username}
+            password = { password }
+            handleSubmit = {handleLogin}
+            handleUsernameChange = {({ target }) => setUsername(target.value)}
+            handlePasswordChange = { ({ target }) => setPassword(target.value) }
+          />
+        </Toggable>
         :
         <>
         <form onSubmit={addBlog}>
