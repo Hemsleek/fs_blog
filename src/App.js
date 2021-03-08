@@ -49,8 +49,8 @@ const App = () => {
       
       
     } catch (error) {
-        setMessage({...message,text:error.response.data}); 
-       delayTimer()
+        setMessage({...message,text:error.response.data.error}); 
+        delayTimer()
     }
 
   }
