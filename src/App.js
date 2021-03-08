@@ -5,6 +5,7 @@ import blogService from './services/blogs'
 import { login } from './services/login'
 import LoginForm from './components/LoginForm'
 import Toggable from './components/Toggable'
+import NewBlogForm from './components/NewBlogForm'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -94,30 +95,9 @@ const App = () => {
         </Toggable>
         :
         <>
-        <form onSubmit={addBlog}>
-          <div>
-              title:
-              <input
-              type="text"
-              name="Title"
-            />
-          </div>
-          <div>
-              author:
-              <input
-              type="text"
-              name="Author"
-            />
-          </div>
-          <div>
-              url:
-              <input
-              type="text"
-              name="Url"
-            />
-          </div>
-          <button type="submit">save</button>
-        </form>
+        <Toggable buttonLabel= 'New Note'>
+          <NewBlogForm handleSubmit = { addBlog}/>
+        </Toggable>
         <h2>blogs</h2>
         <h3>
           {user.username} logged in{'\t'}
