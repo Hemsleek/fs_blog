@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Blog from './components/Blog'
 import Notification from './components/Notification'
 import blogService from './services/blogs'
@@ -13,6 +13,8 @@ const App = () => {
   const [message, setMessage] = useState({text:null,type:'error'})
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+
+  const blogFormRef = useRef()
 
   const delayTimer = (timer=3000) =>{
     setTimeout(() => {
@@ -60,6 +62,8 @@ const App = () => {
     window.localStorage.removeItem('user')
     setUser(null)
   }
+
+
   const addBlog = async e =>{
     e.preventDefault()
     const form = e.target
@@ -69,7 +73,7 @@ const App = () => {
 
     try {
       const newBlog = await blogService.create({title:Title.value, author:Author.value, url:Url.value, likes:0})
-      console.log({newBlog})
+      blogFormRef.current.toggleVisibility()
       setBlogs(blogs.concat(newBlog))
       setMessage({...message,text:`A new Blog ${Title.value} by ${Author.value} added`,type:'success'})
       form.reset()
@@ -95,17 +99,19 @@ const App = () => {
         </Toggable>
         :
         <>
-        <Toggable buttonLabel= 'New Note'>
-          <NewBlogForm handleSubmit = { addBlog}/>
-        </Toggable>
         <h2>blogs</h2>
         <h3>
           {user.username} logged in{'\t'}
           <button onClick = {handleLogout}>logout</button>
         </h3>
-        {blogs.map(blog =>
-          <Blog key={blog.id} blog={blog} />
-        )}
+        <Toggable buttonLabel= 'New Note' ref= { blogFormRef }>
+          <NewBlogForm handleSubmit = { addBlog}/>
+        </Toggable>
+        <div style={{marginTop:'1rem'}}>
+          {blogs.map(blog =>
+            <Blog key={blog.id} blog={blog} />
+          )}
+        </div>
        </>
       }
       </div>

@@ -1,8 +1,10 @@
 import React from 'react'
 
 const NewBlogForm = ({ handleSubmit}) => {
+
     return (
       <form onSubmit={handleSubmit}>
+        <h2>Create New</h2>
       <div>
           title:
           <input
@@ -24,7 +26,7 @@ const NewBlogForm = ({ handleSubmit}) => {
           name="Url"
         />
       </div>
-      <button type="submit">save</button>
+      <button type="submit">Create</button>
     </form>
     )
 }
