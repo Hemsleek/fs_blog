@@ -70,7 +70,6 @@ const App = () => {
     const [Title,Author,Url] = e.target
     console.log(Title,Author,Url)
     
-
     try {
       const newBlog = await blogService.create({title:Title.value, author:Author.value, url:Url.value, likes:0})
       blogFormRef.current.toggleVisibility()
