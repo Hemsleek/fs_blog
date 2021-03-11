@@ -1,7 +1,6 @@
 import React,{ useState } from 'react'
 
-
-const Blog = ({ blog }) => {
+const Blog = ({ blog, incrementLikes }) => {
   const [showInfo, setshowInfo] = useState(false)
 
   const buttonStyle = {
@@ -19,6 +18,7 @@ const Blog = ({ blog }) => {
     width:'fit-content',
     rowGap:'5px'
   }
+
   return(
   <div style={blogStyle}>
     <span>
@@ -30,7 +30,7 @@ const Blog = ({ blog }) => {
         <span>{blog.url}</span>
         <span>
           Likes - {blog.likes}
-          <button style={buttonStyle}>like</button>
+          <button onClick={() => incrementLikes(blog)} style={buttonStyle}>like</button>
         </span>
 
         <span>{ blog.author}</span>
