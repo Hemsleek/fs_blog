@@ -94,8 +94,17 @@ const App = () => {
     }
   }
 
-  const deleteBlog = (blog) => {
-    console.log({blog})
+  const deleteBlog = async(blog) => {
+    const confirmDelete = window.confirm(`Remove blog ${blog.title} by ${blog.author}?`)
+    if(!confirmDelete) return null
+
+    try {
+      await blogService.remove(blog.id)
+      setBlogs(blogs.filter(blogItem => blogItem.id!==blog.id))
+
+    } catch (error) {
+     console.log(error) 
+    }
   }
 
   return (
