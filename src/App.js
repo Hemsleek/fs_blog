@@ -41,6 +41,7 @@ const App = () => {
 
   const handleLogin = async e => {
     e.preventDefault()
+
     try {
       const user = await login({ username, password })
       window.localStorage.setItem('user' , JSON.stringify(user))
@@ -93,6 +94,10 @@ const App = () => {
     }
   }
 
+  const deleteBlog = (blog) => {
+    console.log({blog})
+  }
+
   return (
     <>
       <Notification message = {message} />
@@ -119,7 +124,7 @@ const App = () => {
         </Toggable>
         <div style={{marginTop:'1rem'}}>
           {blogs.map(blog =>
-            <Blog key={blog.id} blog={blog} incrementLikes={handleLikesChange} />
+            <Blog key={blog.id} blog={blog} incrementLikes={handleLikesChange} deleteBlog={ deleteBlog } />
           )}
         </div>
        </>
