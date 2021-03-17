@@ -18,6 +18,14 @@ const Blog = ({ blog, incrementLikes, deleteBlog }) => {
     width:'fit-content',
     rowGap:'5px'
   }
+  const removeButtonStyle = {
+    cursor:'pointer',
+    backgroundColor:'#4085F6',
+    width:'fit-content',
+    padding:'5px',
+    border:'none',
+    borderRadius:'5px'
+  }
 
   return(
   <div style={blogStyle}>
@@ -30,11 +38,15 @@ const Blog = ({ blog, incrementLikes, deleteBlog }) => {
         <span>{blog.url}</span>
         <span>
           Likes - {blog.likes}
-          <button onClick={() => incrementLikes(blog)} style={buttonStyle}>like</button>
+          <button onClick={() => incrementLikes(blog)} style={buttonStyle}>
+            like
+          </button>
         </span>
 
         <span>{ blog.author}</span>
-        <button onClick={() => deleteBlog(blog)} style={buttonStyle}>Remove</button>
+        <button onClick={() => deleteBlog(blog)} style={removeButtonStyle}>
+          Remove
+        </button>
       </>
     }
   </div>
