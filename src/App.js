@@ -38,7 +38,9 @@ const App = () => {
     }
 
   },[])
+  const sortedBlog = () => blogs.sort((a,b) => a.likes - b.likes)
 
+  console.log({sorted: sortedBlog()})
   const handleLogin = async e => {
     e.preventDefault()
 
