@@ -38,9 +38,8 @@ const App = () => {
     }
 
   },[])
-  const sortedBlog = () => blogs.sort((a,b) => a.likes - b.likes)
+  const sortedBlog = () => blogs.length? blogs.sort((a,b) => a.likes - b.likes) : blogs
 
-  console.log({sorted: sortedBlog()})
   const handleLogin = async e => {
     e.preventDefault()
 
@@ -132,7 +131,7 @@ const App = () => {
           <NewBlogForm handleSubmit = { addBlog}/>
         </Toggable>
         <div style={{marginTop:'1rem'}}>
-          {blogs.map(blog =>
+          {sortedBlog().map(blog =>
             <Blog key={blog.id} blog={blog} incrementLikes={handleLikesChange} deleteBlog={ deleteBlog } />
           )}
         </div>
