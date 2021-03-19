@@ -95,14 +95,16 @@ const App = () => {
     }
   }
 
-  const deleteBlog = (blog) => {
+  const deleteBlog = async(blog) => {
     const confirmDelete = window.confirm(`Remove blog ${blog.title} by ${blog.author}?`)
     if(!confirmDelete) return null
-       blogService.remove(blog.id).then( data => {
-         console.log('i don enter this place already')
-        setBlogs(blogs.filter(blogItem => blogItem.id!==blog.id))
-        })
-        .catch(err => console.log(err.response.data))
+
+    try {
+      await blogService.remove(blog.id)
+      setBlogs(blogs.filter(blogItem => blogItem.id!==blog.id))    
+    } catch (error) {
+      console.log(error.response.data)
+    }
     
   }
 
