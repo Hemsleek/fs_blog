@@ -8,7 +8,7 @@ const Blog = ({ blog, incrementLikes, deleteBlog }) => {
     marginLeft:'5px',
     cursor:'pointer'
   }
-  
+
   const blogStyle = {
     display:'flex',
     flexDirection:'column',
@@ -29,12 +29,12 @@ const Blog = ({ blog, incrementLikes, deleteBlog }) => {
   }
 
   return(
-  <div style={blogStyle}>
-    <span>
+    <div style={blogStyle}>
+      <span>
         {blog.title} -  {blog.author.toUpperCase()}
         <button onClick={() => setshowInfo(!showInfo)} style = { buttonStyle }>{showInfo? 'Hide' : 'View'}</button>
-    </span>
-    {showInfo && 
+      </span>
+      {showInfo &&
       <>
         <span>{blog.url}</span>
         <span>
@@ -49,8 +49,8 @@ const Blog = ({ blog, incrementLikes, deleteBlog }) => {
           Remove
         </button>
       </>
-    }
-  </div>
+      }
+    </div>
   )
 }
 
