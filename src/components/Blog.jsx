@@ -30,7 +30,7 @@ const Blog = ({ blog, incrementLikes, deleteBlog }) => {
   }
 
   return(
-    <div style={blogStyle}>
+    <div className="blog" style={blogStyle}>
       <span>
         {blog.title} -  {blog.author.toUpperCase()}
         <button onClick={() => setshowInfo(!showInfo)} style = { buttonStyle }>{showInfo? 'Hide' : 'View'}</button>
