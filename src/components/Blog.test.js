@@ -1,6 +1,6 @@
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
-import { render } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react'
 import Blog from './Blog'
 
 test('renders title content and author', () => {
@@ -41,4 +41,26 @@ test('does not render url and likes ', () => {
     'http:hemsleek.com'
   )
 
+})
+test('calls event handler twice when likes button is clicked twice',() =>{
+  const blog = {
+    title: 'Component testing is done with react-testing-library',
+    author: 'Asiyanbi Mubashir',
+    url:'http:hemsleek.com',
+    likes:2
+  }
+
+  const mockHandler = jest.fn()
+
+  const component = render(
+    <Blog blog={blog} incrementLikes={mockHandler} />
+  )
+
+  const viewButton = component.getByText('View')
+  fireEvent.click(viewButton)
+  const likeButton = component.getByText('like')
+  fireEvent.click(likeButton)
+  fireEvent.click(likeButton)
+
+  expect(mockHandler.mock.calls).toHaveLength(2)
 })
