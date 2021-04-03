@@ -42,6 +42,29 @@ test('does not render url and likes ', () => {
   )
 
 })
+
+test('blog url and likes show when view button clicked',() =>{
+  const blog = {
+    title: 'Component testing is done with react-testing-library',
+    author: 'Asiyanbi Mubashir',
+    url:'http:hemsleek.com',
+    likes:2
+  }
+
+  const component = render(
+    <Blog blog={blog} />
+  )
+  const viewButton = component.getByText('View')
+  fireEvent.click(viewButton)
+
+  expect(component.container).toHaveTextContent(
+    'Likes - 2'
+  )
+  expect(component.container).toHaveTextContent(
+    'http:hemsleek.com'
+  )
+})
+
 test('calls event handler twice when likes button is clicked twice',() =>{
   const blog = {
     title: 'Component testing is done with react-testing-library',
