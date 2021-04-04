@@ -2,6 +2,7 @@ import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
 import { render, fireEvent } from '@testing-library/react'
 import Blog from './Blog'
+import NewBlogForm from './NewBlogForm'
 
 test('renders title content and author', () => {
   const blog = {
@@ -43,7 +44,7 @@ test('does not render url and likes ', () => {
 
 })
 
-test('blog url and likes show when view button clicked',() =>{
+test('blog url and likes show when view button clicked',() => {
   const blog = {
     title: 'Component testing is done with react-testing-library',
     author: 'Asiyanbi Mubashir',
@@ -65,7 +66,7 @@ test('blog url and likes show when view button clicked',() =>{
   )
 })
 
-test('calls event handler twice when likes button is clicked twice',() =>{
+test('calls event handler twice when likes button is clicked twice',() => {
   const blog = {
     title: 'Component testing is done with react-testing-library',
     author: 'Asiyanbi Mubashir',
@@ -86,4 +87,16 @@ test('calls event handler twice when likes button is clicked twice',() =>{
   fireEvent.click(likeButton)
 
   expect(mockHandler.mock.calls).toHaveLength(2)
+})
+
+test('form calls event handler', () => {
+  const handleSubmit = jest.fn()
+
+  const component = render(
+    <NewBlogForm handleSubmit={handleSubmit}/>
+  )
+
+  const form = component.container.querySelector('form')
+  
+
 })
