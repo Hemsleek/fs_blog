@@ -105,6 +105,7 @@ test('form calls event handler', () => {
 
   expect(handleSubmit.mock.calls).toHaveLength(1)
   console.log(prettyDOM(title))
-
-
+  const test = handleSubmit.mock.calls[0][0].title
+  console.log(test)
+  expect(handleSubmit.mock.calls[0][0].title).toBe('Component testing is done with react-testing-library')
 })
