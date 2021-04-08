@@ -67,6 +67,7 @@ const App = () => {
 
 
   const addBlog = async e => {
+    e.persist()
     e.preventDefault()
     const form = e.target
     const [Title,Author,Url] = e.target
